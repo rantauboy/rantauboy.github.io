@@ -1,61 +1,263 @@
 <!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-     <link href="style.css" rel="stylesheet">
-    <title>にゃのポートフォリオ</title></title>
-  </head>
-  <body>
-    <h1>にゃのGithub練習用サイト</h1>
-    <img scr="40% OFF HALLOWEEN SALE ૮ ҂ ˕ • ྀིა 💉 - Click to view on Ko-fi.gif">
-        <h2>About</h2>
-    <p>
-    簡単な自己紹介♪<br>
-    </p>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tixi-Voice — Offline Persian &amp; English Speech Studio (TTS + STT)</title>
+<meta name="description" content="Tixi Voice is a free, offline Persian and English speech studio for Windows x64. Convert text to speech with Piper, transcribe audio with Whisper, and create a personal voice with OpenVoice. Portable, no install, fully local.">
+<meta name="keywords" content="offline, openvoice, persian, piper-tts, pyside6, python, speech-to-text, tts, whisper, windows, text to speech persian, offline speech recognition, portable voice app">
+<meta name="author" content="rantauboy">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#7c3aed">
+<link rel="canonical" href="https://github.com/rantauboy/Tixi-Voice">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Tixi-Voice — Offline Persian &amp; English Speech Studio">
+<meta property="og:description" content="Free portable speech studio for Windows. Text to speech, speech to text, and personal voice cloning — all running locally on your own computer.">
+<meta property="og:url" content="https://github.com/rantauboy/Tixi-Voice/releases">
+<meta property="og:site_name" content="Tixi-Voice">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tixi-Voice — Offline Persian &amp; English Speech Studio">
+<meta name="twitter:description" content="Convert text to speech and audio to text in Persian and English, offline, on Windows. No install, no accounts, no uploads.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Tixi-Voice",
+  "applicationCategory": "MultimediaApplication",
+  "operatingSystem": "Windows x64",
+  "description": "Offline Persian/English speech studio with text to speech, speech to text and personal voice cloning.",
+  "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0;
+    background: #f4f6fa;
+    color: #1f2430;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 32px 20px 64px;
+  }
+  .card {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(24, 32, 56, 0.08);
+    padding: 40px 36px;
+  }
+  h1 {
+    font-size: 2.1rem;
+    line-height: 1.25;
+    margin: 0 0 16px;
+    color: #14182a;
+    letter-spacing: -0.4px;
+  }
+  h2 {
+    font-size: 1.4rem;
+    margin: 40px 0 12px;
+    color: #14182a;
+    letter-spacing: -0.2px;
+  }
+  h3 {
+    font-size: 1.08rem;
+    margin: 24px 0 6px;
+    color: #2b3149;
+  }
+  p { margin: 0 0 16px; }
+  ul, ol { margin: 0 0 18px; padding-left: 24px; }
+  li { margin-bottom: 8px; }
+  a { color: #5b3df5; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .lead {
+    font-size: 1.12rem;
+    color: #3c4359;
+    margin-bottom: 26px;
+  }
+  .btn {
+    display: inline-block;
+    background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.12rem;
+    padding: 16px 34px;
+    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(124, 58, 237, 0.28);
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(124, 58, 237, 0.34);
+    text-decoration: none;
+  }
+  .btn-wrap { margin: 8px 0 10px; }
+  .note { font-size: 0.94rem; color: #5b6379; margin-top: 10px; }
+  .panel {
+    background: #f6f4ff;
+    border-left: 4px solid #7c3aed;
+    border-radius: 10px;
+    padding: 18px 22px;
+    margin: 22px 0;
+  }
+  .panel p:last-child { margin-bottom: 0; }
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 18px 0 8px;
+  }
+  .tile {
+    flex: 1 1 240px;
+    background: #f8f9fc;
+    border: 1px solid #e6e9f2;
+    border-radius: 12px;
+    padding: 18px 20px;
+  }
+  .tile h3 { margin-top: 0; }
+  .tile p { margin-bottom: 0; font-size: 0.97rem; color: #444b62; }
+  ol.steps { counter-reset: step; list-style: none; padding-left: 0; }
+  ol.steps > li {
+    counter-increment: step;
+    position: relative;
+    padding-left: 46px;
+    margin-bottom: 18px;
+  }
+  ol.steps > li::before {
+    content: counter(step);
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #7c3aed;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #6b7285;
+    margin-top: 28px;
+  }
+  @media (max-width: 600px) {
+    .card { padding: 26px 20px; }
+    h1 { font-size: 1.6rem; }
+    h2 { font-size: 1.2rem; }
+    body { font-size: 16px; }
+    .btn { display: block; text-align: center; padding: 15px 18px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="card">
 
-    <h3>Profile</h3>
+    <h1>🎙️ Tixi-Voice - Talk Freely, Even Fully Offline</h1>
+
+    <p class="lead">Tixi Voice is a speech studio for your own computer. It reads text out loud in Persian and English, it turns recordings into written text, and it can speak in a voice that sounds like a person you choose. Everything happens on your machine. Nothing is sent to the internet, and you never create an account.</p>
+
+    <div class="btn-wrap">
+      <a class="btn" href="https://github.com/rantauboy/Tixi-Voice/releases">⬇️ Get Tixi-Voice for Windows</a>
+    </div>
+    <p class="note">Free and open source. Portable build for Windows x64 — nothing to install.</p>
+
+    <h2>💡 What Is Tixi-Voice?</h2>
+    <p>Most voice tools ask you to upload your files to a website and wait. Tixi Voice works the other way around. It is a single folder that lives on your Windows computer and uses every part of your PC to do the work — no uploads, no waiting in a queue, no monthly fee.</p>
+    <p>The application is built around three well-known open speech engines. <strong>Piper</strong> handles text-to-speech, so written words come out as natural spoken audio. <strong>Whisper</strong> handles speech-to-text, so an audio file becomes a text file you can copy, edit and search. <strong>OpenVoice</strong> lets you capture the character of a voice and apply it to new speech — your own personal voice.</p>
+    <p>Because the whole program is self-contained, you can copy the folder to a USB stick, move it to another Windows machine, and carry on exactly where you left off. There is no installer, no background service and no leftover files scattered across your system.</p>
+
+    <h2>✨ What You Can Do With It</h2>
+    <div class="grid">
+      <div class="tile">
+        <h3>🗣️ Read text aloud</h3>
+        <p>Paste a paragraph, an article or a whole document and listen to it in a natural Persian or English voice. Adjust the speaking speed until it feels comfortable.</p>
+      </div>
+      <div class="tile">
+        <h3>📝 Turn audio into text</h3>
+        <p>Drop in a voice memo, an interview or a lecture recording and get a written transcript you can copy straight into any editor.</p>
+      </div>
+      <div class="tile">
+        <h3>🎭 Create a personal voice</h3>
+        <p>Give the app a short sample of a voice, and it will read new text in that style. Great for narrations, learning material and accessibility projects.</p>
+      </div>
+      <div class="tile">
+        <h3>🌐 Switch between two languages</h3>
+        <p>Persian and English are both first-class citizens here. Move between them without changing any settings or downloading anything extra.</p>
+      </div>
+      <div class="tile">
+        <h3>🔌 Stay disconnected</h3>
+        <p>Disconnect the internet cable, switch off Wi-Fi, and the program keeps working exactly the same. Your voice notes never leave the room.</p>
+      </div>
+      <div class="tile">
+        <h3>💾 Carry it anywhere</h3>
+        <p>Run it from a USB drive on any compatible Windows computer. Your settings and history travel with the folder.</p>
+      </div>
+    </div>
+
+    <h2>🖥️ What Your Computer Needs</h2>
     <ul>
-      <li>にゃん</li>
-      <li>関東住み</li>
-      <li>vsコード使える</li>
+      <li><strong>Operating system:</strong> Windows 10 or Windows 11, 64-bit (x64) edition.</li>
+      <li><strong>Memory:</strong> 8 GB of RAM is a sensible minimum. 16 GB keeps longer transcripts and larger voices running comfortably.</li>
+      <li><strong>Free disk space:</strong> roughly 4–6 GB, depending on which voice models you keep on hand.</li>
+      <li><strong>Processor:</strong> any modern Intel or AMD 64-bit processor. A dedicated graphics card is nice to have but not required.</li>
+      <li><strong>Sound:</strong> any speakers or headphones, plus a microphone or audio file if you plan to transcribe.</li>
+    </ul>
+    <p>No Python installation, no drivers, no extra downloads. The folder contains everything the program needs to run.</p>
+
+    <h2>⬇️ Download and Get Started</h2>
+    <div class="panel">
+      <p><strong>Visit this link to download the application:</strong><br>
+      <a href="https://github.com/rantauboy/Tixi-Voice/releases">https://github.com/rantauboy/Tixi-Voice/releases</a></p>
+    </div>
+    <ol class="steps">
+      <li><strong>Open the link.</strong> You will land on the releases page for Tixi Voice. Look for the newest release at the top of the page.</li>
+      <li><strong>Choose the Windows download.</strong> In the list of files attached to that release, pick the one whose name mentions Windows x64. The download starts immediately and usually takes a few minutes.</li>
+      <li><strong>Unpack the folder.</strong> When the download finishes, right-click the file and choose <em>Extract All</em>. Pick a simple location such as <em>Documents</em> or your Desktop. Avoid extracting into <em>Program Files</em>.</li>
+      <li><strong>Start the application.</strong> Open the extracted folder and double-click the Tixi Voice application file. It opens straight away — there is nothing to install.</li>
+      <li><strong>Allow the first launch.</strong> The very first time you run it, Windows may show a blue "Windows protected your PC" box. Select <em>More info</em> and then <em>Run anyway</em>. This is normal for small open-source applications that do not pay for a commercial signing certificate.</li>
+    </ol>
+
+    <h2>🚀 Your First Session, Step by Step</h2>
+    <h3>Making speech from text</h3>
+    <p>Open the text-to-speech area of the window, paste or type your text into the large box, choose Persian or English, and select a voice. Press the play button to hear a preview, then export the result as an audio file when you are happy with it. The voice list will show everything already available in the folder.</p>
+    <h3>Turning a recording into text</h3>
+    <p>Switch to the speech-to-text area, pick the audio file you want transcribed, and confirm the language. The transcript appears in the window as it is produced. When it finishes, copy the text out or save it as a plain text file. Clear speech and a quiet room give noticeably better results.</p>
+    <h3>Building a personal voice</h3>
+    <p>In the voice section, load a short, clean recording of the voice you want to use — around half a minute of steady speech is plenty. Save the profile with a name you recognise, then select it whenever you generate new speech. Keep the sample free of background music and noise for the most convincing result.</p>
+
+    <h2>🔒 Your Voice Stays Yours</h2>
+    <p>Every calculation happens on your own hardware. Text you type, audio you import and voices you create are stored in the application folder on your computer and nowhere else. There is no telemetry, no analytics endpoint and no cloud account. If you work with sensitive material — medical notes, legal drafts, interviews, classroom recordings — the file never crosses your network connection.</p>
+    <p>This also means the program runs happily on a laptop with no connection at all: in a classroom, on a train, in a remote office, or on a machine that is deliberately kept offline for security reasons.</p>
+
+    <h2>🧰 If Something Does Not Work</h2>
+    <ul>
+      <li><strong>The window does not open.</strong> Confirm you are on a 64-bit Windows system and that you extracted the archive fully before double-clicking. Running the application from inside a compressed folder will not work.</li>
+      <li><strong>Windows blocks the file.</strong> Right-click the application file, open <em>Properties</em>, and tick <em>Unblock</em> at the bottom of the General tab, then try again.</li>
+      <li><strong>Speech generation is slow.</strong> Close other heavy programs. The longer the text, the more work the processor has to do; splitting a long document into paragraphs keeps things responsive.</li>
+      <li><strong>The transcript is inaccurate.</strong> Check that the selected language matches the recording, then try a cleaner sample. Background noise is the most common cause.</li>
+      <li><strong>No sound comes out.</strong> Use the speaker test in Windows settings to confirm the correct output device is selected, then reopen the application.</li>
     </ul>
 
-    <h3>Skills</h3>
-    <table>
-      <tr>
-        <th>OS</th>
-        <td>Windows11, </td>
-      </tr>
-      <tr>
-        <th>HTML,Javascript, Githubなど</th>
-        <td>ほんの少しだけ</td>
-      </tr>
-      <tr>
-        <th>資格など</th>
-        <td>英検・化粧品検定</td>
-      </tr>
-    </table>
-    <h3>好きな曲<h3>
-      <iframe width="560" height="315" src="https://www.youtube.com/embed/QfaB8-2DGU0?si=fJi79aaxl69SucRK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-  
-    <h3>Contact</h3>
-    <p>連絡先はひみつ！</p>
-    
-    <h3>History</h3>
-    <p>高卒</p>
-    <table>
-    
-      <tr>
-        <th>202×年</th>
-        <td>学校法人角川ドワンゴ学園 <a href="https://nnn.ed.jp/">N高等学校</a> 卒業</td>
-      </tr>
-      <tr>
-       
-    </table>
-      <h3>作ってみた
-      </h3>
-      <iframe src="https://openprocessing.org/sketch/3054399/embed/" width="400" height="400"></iframe>
-    
-  </body>
+    <h2>📄 License and Project</h2>
+    <p>Tixi Voice is released under the GNU General Public License version 3 (GPL-3.0). You are free to use it, study it, change it and share it, provided that derivative work stays under the same license. The project is written in Python with a PySide6 interface and is developed in the open on GitHub.</p>
+    <p>Downloads: <a href="https://github.com/rantauboy/Tixi-Voice/releases">https://github.com/rantauboy/Tixi-Voice/releases</a></p>
+
+    <p class="footer">Tixi-Voice · Offline Persian &amp; English speech studio for Windows x64 · GPL-3.0</p>
+
+  </div>
+</div>
+</body>
 </html>
